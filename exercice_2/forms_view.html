@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire Achat</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
+</head>
+<body>
+    <!-- Formulaire d'enregistrement d'en-tete d'achat -->
+    <div class="container">
+        <h1>En-tete achat</h1>
+        <form action="#" method="post">
+            <label for="fournisseur">Fournisseur</label>
+            <select name="fournisseur" id="fournisseur" required>
+                <option value="1">Fournisseur 1</option>
+                <option value="2">Fournisseur 2</option>
+                <option value="3">Fournisseur 3</option>
+            </select>
+            <!-- Ligne d'achat -->
+        <h1>Ligne achat</h1>
+        <form action="#" method="post">
+            <label for="produit">Article</label>
+            <select name="produit" id="produit" required>
+                <option value="1">Article 1</option>
+                <option value="2">Article 2</option>
+                <option value="3">Article 3</option>
+            </select>
+            <label for="quantite_order">Quantite commande</label>
+            <input type="number" name="quantite_receptionne" id="quantite_receptionne" required>
+            <label for="unit">Unite de commande</label>
+            <input type="text" name="unit" id="unit" required>
+            <label for="delai_demande">Delai demande</label>
+            <input type="date" name="delai_demande" id="delai_demande" required>
+            <label for="prix">Prix unitaire</label>
+            <input type="number" name="prix" id="prix" required>
+            <label for="statut">Statut</label>
+            <select name="statut" id="statut" disabled>
+                <option value="1">Ouvert</option>
+                <option value="3">Cloture</option>
+            <input type="submit" value="Enregistrer">
+        </form>
+
+    
+</body>
+</html>

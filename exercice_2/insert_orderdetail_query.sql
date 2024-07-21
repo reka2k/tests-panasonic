@@ -1,0 +1,1 @@
+INSERT INTO `order_detail` (`header_id`, `article_id`, `ordered_quantity`, `prefered_delay`, `unit_price`, `created_by`) VALUES (1, 1, 10, 2024-07-01, 1, 'user');

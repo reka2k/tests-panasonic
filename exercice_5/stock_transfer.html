@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
+    <title>Exercice 5</title>
+</head>
+<body>
+    <div class="container">
+        <h1 style="margin-top: 2%;">Transfer de stock</h1>
+        <form action="#" method="post" id="transfer_form">  
+            <label for="product">Article</label>
+            <select type="text" name="product" id="product" required>
+                <option value="product_1">Article 1</option>
+                <option value="product_2">Article 2</option>
+                <option value="product_3">Article 3</option>
+            </select>
+            <div class="grid">
+                <div>
+                    <label for="quantity">Quantité</label>
+                    <input type="number" name="quantity" id="quantity" required max=10>
+                </div>
+                <div>
+                    <label for="from">De</label>
+                    <select type="text" name="from" id="from" disabled>
+                        <option value="location_1">Emplacement 1</option>
+                        <option value="location_2">Emplacement 2</option>
+                        <option value="location_3">Emplacement 3</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="to">À</label>
+                    <select type="text" name="to" id="to" required>
+                        <option value="location_1" id="location_1">Emplacement 1</option>
+                        <option value="location_2" id="location_2">Emplacement 2</option>
+                        <option value="location_3" id="location_3">Emplacement 3</option>
+                    </select>
+                </div>  
+            </div>
+            <div style="margin-bottom: 2%;">
+                Changer l'emplacement par défaut ?
+                <input type="checkbox" id="change_default_location">
+            </div>
+            
+            <div>
+                <button type="submit" id="submit">Transférer</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+<script>
+    document.getElementById('product').addEventListener('change', function() {
+        let product = document.getElementById('product').value;
+        let from = document.getElementById('from');
+        let quantity = document.getElementById('quantity');
+
+        if (product === 'product_1') {
+            from.value = 'location_1';
+            quantity.setAttribute('max', 10);
+            quantity.value = 10;
+        }
+
+        if (product === 'product_2') {
+            from.value = 'location_2';
+            quantity.setAttribute('max', 5);
+            quantity.value = 5;
+        }
+
+        if (product === 'product_3') {
+            from.value = 'location_3';
+            quantity.setAttribute('max', 15);
+            quantity.value = 15;
+        }
+    });
+
+    document.getElementById('submit').addEventListener('click', function(e) {
+        e.preventDefault();
+        let from = document.getElementById('from').value;
+        let to = document.getElementById('to').value;
+
+        if (from === to) {
+            alert('Impossible de transférer le stock dans le même emplacement');
+        } else {
+            alert('Stock transféré avec succès');
+            document.getElementById('transfer_form').submit();
+        }
+    });
+</script>

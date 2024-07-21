@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
+    <script src="./sortPurchaseTable.js"></script>
+    <title>Exercice 4</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Ordres d'achat </h1>
+        <br>
+    
+        <div class="container">
+            <form action="#" method="post" id="sort_form">
+                <fieldset class="grid">
+                    <div class="input-container">
+                        <label for="colonne"> Tri par :</label>
+                            <select id="colonne" name="colonne">
+                                <option></option>
+                                <option value="statut">Statut</option>
+                                <option value="sournisseur">Fournisseur</option>
+                            </select>
+                    </div>
+                    
+    
+                    <div class="input-container">
+                        <label for="ordre">Ordre de tri</label>
+                        <select id="ordre" name="ordre">
+                            <option></option>
+                            <option value="asc">Croissant</option>
+                            <option value="desc">Décroissant</option>
+                        </select>
+                    </div>
+                    
+    
+                    <div class="input-container">
+                        <label for="dateDebut">Date de début :</label>
+                        <input type="date" id="dateDebut" name="dateDebut">
+                    </div>
+                    
+                    <div class="input-container">
+                        <label for="dateFin">Date de fin :</label>
+                        <input type="date" id="dateFin" name="dateFin">
+                    </div>
+                    <div class="input-container">
+                        <input type="submit" value="Trier" style="margin-top: 16%;">
+                    </div>
+                    
+                </fieldset>
+            </form>
+        </div>
+        
+    
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>ID en-tete</th>
+                    <th>ID Ligne</th>
+                    <th>Fournisseur</th>
+                    <th>Article</th>
+                    <th>Statut</th>
+                    <th>Quantite</th>
+                    <th>Prix</th>
+                    <th>Delai confirme</th>
+                </tr>
+            </thead>
+    
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Fournisseur 1</td>
+                    <td>Article 1</td>
+                    <td>Cloture</td>
+                    <td>10</td>
+                    <td>1000</td>
+                    <td id="confirmed_delay">01/07/2024</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>Fournisseur 2</td>
+                    <td>Article 2</td>
+                    <td>Ouvert</td>
+                    <td>20</td>
+                    <td>2000</td>
+                    <td id="confirmed_delay">01/08/2024</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>Fournisseur 3</td>
+                    <td>Article 3</td>
+                    <td>Cloture</td>
+                    <td>30</td>
+                    <td>3000</td>
+                    <td id="confirmed_delay">01/09/2024</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+<hr>
+<br>
+    <div class="container">
+        <h1>Reception d'achat</h1>
+        <form action="#" method="post">
+            <label for="fournisseur">Fournisseur</label>
+            <select name="fournisseur" id="fournisseur" required>
+                <option value="1">Fournisseur 1</option>
+                <option value="2">Fournisseur 2</option>
+                <option value="3">Fournisseur 3</option>
+            </select>
+            <label for="ligne_reception">Ligne achat</label>
+            <select name="ligne_reception" id="ligne_reception" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <label for="all_orders" style="display: inline-block;">Reception de tous les ordres ? </label>
+            <input type="checkbox" name="all_orders" id="all_orders" style="display: inline-block;">
+            <br>
+            <label for="quantite_order">Quantite receptionne</label>
+            <input type="number" name="quantite_receptionne" id="quantite_receptionne" required>
+            <input type="submit" value="Enregistrer">
+    </div>
+
+    <style>
+        input, label {
+        display:block;
+    }
+    
+    .input-container {
+        display: inline-block;
+    }
+    </style>
+
+    <script>
+        document.getElementById('sort_form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            sortOrders();
+        });
+
+        document.getElementById('all_orders').addEventListener('change', function() {
+            let allOrders = document.getElementById('all_orders');
+            let ligneReception = document.getElementById('ligne_reception');
+            let quantiteReceptionne = document.getElementById('quantite_receptionne');
+
+            if (allOrders.checked) {
+                ligneReception.disabled = true;
+                ligneReception.value = '';
+                quantiteReceptionne.disabled = true;
+                alert('Veillez à bien vérifier les quantités avant de valider la réception');
+            } else {
+                ligneReception.disabled = false;
+                quantiteReceptionne.disabled = false;
+            }
+        });
+    </script>
+    
+</body>
+</html>
