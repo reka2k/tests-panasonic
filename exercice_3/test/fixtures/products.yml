@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyText
+  stocking_unit: 1
+  familiy: MyString
+  net_unit_weight: 1.5
+  brut_unit_weight: 1.5
+  total_available_stock: 1
+  total_unavailable_stock: 1
+  on_hold_sale_quantity: 1
+  on_hold_delivery_quantity: 1
+  default_location: MyString
+  created_by: MyString
+
+two:
+  description: MyText
+  stocking_unit: 1
+  familiy: MyString
+  net_unit_weight: 1.5
+  brut_unit_weight: 1.5
+  total_available_stock: 1
+  total_unavailable_stock: 1
+  on_hold_sale_quantity: 1
+  on_hold_delivery_quantity: 1
+  default_location: MyString
+  created_by: MyString

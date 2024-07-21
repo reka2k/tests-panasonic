@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  provider_id: one
+  status: MyString
+  created_by: MyString
+
+two:
+  id: 1
+  provider_id: two
+  status: MyString
+  created_by: MyString

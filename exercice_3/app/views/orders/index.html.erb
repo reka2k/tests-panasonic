@@ -1,0 +1,160 @@
+<br>
+<div class="container">
+    <h1>Ordres d'achat </h1>
+    <br>
+
+    <div class="container">
+        <form action="#" method="post">
+            <fieldset class="grid">
+                <div class="input-contailer">
+                    <label for="colonne"> Tri par :</label>
+                        <select id="colonne" name="colonne">
+                            <option></option>
+                            <option value="statut">Statut</option>
+                            <option value="sournisseur">Fournisseur</option>
+                        </select>
+                </div>
+                
+
+                <div class="input-container">
+                    <label for="ordre">Ordre de tri</label>
+                    <select id="ordre" name="ordre">
+                        <option></option>
+                        <option value="asc">Croissant</option>
+                        <option value="desc">Décroissant</option>
+                    </select>
+                </div>
+                
+
+                <div class="input-container">
+                    <label for="dateDebut">Date de début :</label>
+                    <input type="date" id="dateDebut" name="dateDebut">
+                </div>
+                
+                <div class="input-container">
+                    <label for="dateFin">Date de fin :</label>
+                    <input type="date" id="dateFin" name="dateFin">
+                </div>
+                <div class="input-container">
+                    <input type="submit" value="Trier" style="margin-top: 16%;">
+                </div>
+                
+            </fieldset>
+        </form>
+    </div>
+    
+
+    <table id="table">
+        <thead>
+            <tr>
+                <th>ID en-tete</th>
+                <th>ID Ligne</th>
+                <th>Fournisseur</th>
+                <th>Article</th>
+                <th>Statut</th>
+                <th>Quantite</th>
+                <th>Prix</th>
+                <th>Delai confirme</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @orders.each do |order| %>
+                <tr>
+                    <td><%= order.order_header.id %></td>
+                    <td><%= order.id %></td>
+                    <td><%= order.order_header.provider.description %></td>
+                    <td><%= order.product.description %></td>
+                    <td><%= order.status %></td>
+                    <td><%= order.order_amount %></td>
+                    <td><%= order.unit_price %></td>
+                    <td id="confirmed_delay"><%= order.confirmed_delay %></td>
+                </tr>
+            <% end %>
+        </tbody>
+
+
+    </table>
+</div>
+
+
+<script>
+function sortOrders(){
+
+    let column = document.getElementById('colonne').value
+    let order = document.getElementById('ordre').value;
+    let dateDebut = document.getElementById('dateDebut').value;
+    let dateFin = document.getElementById('dateFin').value;
+
+    let tableBody = document.querySelector('tbody');
+    let rows = Array.from(tableBody.querySelectorAll('tr'));
+
+
+    function sortRows(rows){
+        return rows.sort((a, b) => {
+            let dateA = new Date(a.querySelector('#confirmed_delay').textContent);
+            let dateB = new Date(b.querySelector('#confirmed_delay').textContent);
+
+            if(dateA < dateB){
+                return -1;
+            } else if(dateA > dateB){
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+    }
+
+
+    if(order === 'desc'){
+        tableBody.innerHTML = '';
+        rows = sortRows(rows).reverse();
+        rows.forEach(row => tableBody.appendChild(row));
+    } 
+    if(order === 'asc'){
+        tableBody.innerHTML = '';
+        rows = sortRows(rows);
+        rows.forEach(row => tableBody.appendChild(row));
+    }
+
+    if (dateDebut){
+        dateDebut = new Date(dateDebut);
+        if (dateFin === ''){
+            dateFin = new Date().setFullYear(dateDebut.getFullYear() + 1);
+        } else {
+            dateFin = new Date(dateFin);
+        }
+        filteredRows = rows.filter(row => {
+            let date = new Date(row.querySelector('#confirmed_delay').textContent);
+            return date >= dateDebut && date <= dateFin;
+        });
+        rows.forEach(row => {
+            if(filteredRows.includes(row)){
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+}
+
+
+document.querySelector('form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    sortOrders();
+});
+
+
+</script>
+
+
+<style>
+    input, label {
+    display:block;
+}
+
+.input-container {
+    display: inline-block;
+}
+</style>
