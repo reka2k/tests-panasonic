@@ -34,9 +34,9 @@ rails s
 ```
 
 L'application est maintenant disponible sur notre navigateur.
-La page est disponible sous la route ==.../orders==.
+La page est disponible sous la route ```.../orders```.
 
-Il est possible de changer la route pour ouvrir la page sur l'index, dans le fichier ==config/routes.rb==
+Il est possible de changer la route pour ouvrir la page sur l'index, dans le fichier ```config/routes.rb```
 ```
 ...
 root "orders#index"
